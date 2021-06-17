@@ -21,7 +21,7 @@ services:
       - ./logs:/var/log/odoo/
       - odoo-web-data:/var/lib/odoo
     networks: 
-      - odoo-backend    
+      - odoo-dev-backend    
 
   db:
     container_name: odoo_db
@@ -37,10 +37,10 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     networks: 
-      - odoo-backend  
+      - odoo-dev-backend  
 
 networks:
-  odoo-backend:
+  odoo-dev-backend:
 
 volumes:
   odoo-web-data:

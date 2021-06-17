@@ -1,42 +1,48 @@
 version: "2"
 
 services:
-  odoo:
+  web:
     container_name: odoo
     image: odoo:14
     restart: unless-stopped
     command: --dev=all
     depends_on:
-      - odoo_db
+      - db
     ports:
-      - "8069:8069"
+      - "${ODOO_PORT}:8069"
+    env_file: .env  
+    environment:
+      - HOST=db
+      - USER=${DB_USER}
+      - PASSWORD=${DB_PASS}  
     volumes:
       - ../addons/${ADDONS_REPOSITORY}/:/mnt/extra-addons
       - ../enterprise:/mnt/enterprise
       - ./config:/etc/odoo
       - ./logs:/var/log/odoo/
       - odoo_data:/var/lib/odoo
-    environment:
-    - HOST=odoo_db
-    - USER=odoo
-    - PASSWORD=odoo
+    networks: 
+      - odoo-backend    
 
-  odoo_db:
+  db:
     container_name: odoo_db
     image: postgres:13
     restart: unless-stopped
     ports:
-      - "6432:5432"
+      - "${DB_PORT}:5432"
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo_db_data:/var/lib/postgresql/data/pgdata
+    networks: 
+      - odoo-backend  
+
+networks:
+  odoo-backend:
 
 volumes:
-  odoo_data:
-    name: odoo-web-data-${ADDONS_REPOSITORY}
-  odoo_db_data:
-    name: odoo-db-data-${ADDONS_REPOSITORY}
+  odoo-web-data:
+  odoo-db-data:

@@ -15,9 +15,9 @@ services:
       - USER=odoo
       - PASSWORD=odoo
     volumes:
-      - ./addons:/mnt/extra-addons
+      - ./projects/:/mnt/extra-addons
       # In case there is the enterprise version
-      - ../enterprise:/mnt/enterprise
+      - ./enterprise:/mnt/enterprise
       - ./config:/etc/odoo
       - ./logs:/var/log/odoo/
       - odoo-web-data:/var/lib/odoo

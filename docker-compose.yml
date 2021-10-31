@@ -17,10 +17,7 @@ services:
     volumes:
       - ../projects/Binkhabaan/odoo-bke/addons:/mnt/odoo-bke
       - ../projects/Raies/odoo-raies:/mnt/odoo-raies
-      - ../projects/Almashriq/odoo-almashriq:/mnt/odoo-almashriq
-      - ../projects/Jau Flowers/odoo-jau:/mnt/odoo-jau
-      # In case there is the enterprise version
-      - ./enterprise:/mnt/enterprise
+      - ../enterprise:/mnt/enterprise
       - ./config:/etc/odoo
       - ./logs:/var/log/odoo/
       - odoo-web-data:/var/lib/odoo
@@ -32,7 +29,7 @@ services:
     image: postgres:13
     restart: unless-stopped
     ports:
-      - "6432:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=odoo

@@ -2,7 +2,7 @@ version: "2"
 
 services:
   web:
-    container_name: odoo
+    container_name: odoo_14
     image: odoo:14
     restart: unless-stopped
     command: --dev=all
@@ -17,7 +17,7 @@ services:
     volumes:
       - ../projects/Binkhabaan/odoo-bke/addons:/mnt/odoo-bke
       - ../projects/Raies/odoo-raies:/mnt/odoo-raies
-      - ../enterprise:/mnt/enterprise
+      - ../enterprise-14:/mnt/enterprise
       - ./config:/etc/odoo
       - ./logs:/var/log/odoo/
       - odoo-web-data:/var/lib/odoo
@@ -25,7 +25,7 @@ services:
       - odoo-dev-backend    
 
   db:
-    container_name: odoo_db
+    container_name: odoo_db_14
     image: postgres:13
     restart: unless-stopped
     ports:

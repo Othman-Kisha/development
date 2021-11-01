@@ -2,7 +2,7 @@ version: "2"
 
 services:
   web:
-    container_name: odoo
+    container_name: odoo_15
     image: odoo:15
     restart: unless-stopped
     command: --dev=all
@@ -17,7 +17,7 @@ services:
     volumes:
       - ../projects/Almashriq/odoo-almashriq:/mnt/odoo-almashriq
       - ../projects/Jau Flowers/odoo-jau:/mnt/odoo-jau
-      - ../enterprise:/mnt/enterprise
+      - ../enterprise-15:/mnt/enterprise
       - ./config:/etc/odoo
       - ./logs:/var/log/odoo/
       - odoo-web-data:/var/lib/odoo
@@ -25,7 +25,7 @@ services:
       - odoo-dev-backend    
 
   db:
-    container_name: odoo_db
+    container_name: odoo_db_15
     image: postgres:latest
     restart: unless-stopped
     ports:

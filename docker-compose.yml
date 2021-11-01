@@ -3,7 +3,7 @@ version: "2"
 services:
   web:
     container_name: odoo
-    image: odoo:latest
+    image: odoo:15
     restart: unless-stopped
     command: --dev=all
     depends_on:

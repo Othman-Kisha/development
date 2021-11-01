@@ -29,7 +29,7 @@ services:
     image: postgres:latest
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "6432:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=odoo

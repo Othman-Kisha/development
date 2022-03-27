@@ -1,0 +1,21 @@
+{
+    "python.analysis.extraPaths": [
+        "/path/to/odoo",
+        "/path/to/odoo/addons",
+        "/path/to/odoo/odoo",
+    ],
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    // pylint_odoo should be installed using pip
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_odoo"],
+    "python.formatting.provider": "yapf",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*.pyc": true
+    }
+}

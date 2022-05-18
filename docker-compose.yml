@@ -2,7 +2,6 @@ version: "2"
 
 services:
   web:
-    container_name: odoo_15
     image: odoo:15
     restart: unless-stopped
     command: --dev=all
@@ -15,16 +14,16 @@ services:
       - USER=odoo
       - PASSWORD=odoo
     volumes:
-      - ./<modules-for-dev>:/mnt/<modules-for-dev>
-      - ../enterprise:/mnt/enterprise
-      - ./config:/etc/odoo
-      - ./logs:/var/log/odoo/
+      - path/to/modules/for/dev:/mnt/custom
+      - path/to/enterprise:/mnt/enterprise
+      - path/to/third-party/modules:/mnt/third-party
+      - path/to/config:/etc/odoo
+      - path/to/logs:/var/log/odoo/
       - odoo-web-data:/var/lib/odoo
     networks:
       - odoo-dev-backend
 
   db:
-    container_name: odoo_db_15
     image: postgres:latest
     restart: unless-stopped
     ports:

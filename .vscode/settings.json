@@ -17,9 +17,9 @@
     "github.gitProtocol": "ssh",
     "debug.autoExpandLazyVariables": true,
     "python.analysis.extraPaths": [
-        "/path/to/odoo",
-        "/path/to/odoo/addons",
-        "/path/to/odoo/odoo",
+        "/Users/othmankisha/Desktop/Work/odoo",
+        "/Users/othmankisha/Desktop/Work/odoo/addons",
+        "/Users/othmankisha/Desktop/Work/odoo/odoo",
     ],
     // "python.linting.enabled": true,
     // "python.linting.pylintEnabled": true,

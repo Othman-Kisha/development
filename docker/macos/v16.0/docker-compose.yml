@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  web:
+    build: .
+    platform: arm64v8
+    restart: unless-stopped
+    command: --dev=all
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./logs:/var/log/odoo/
+      # - path/to/modules/for/dev:/mnt/custom
+      - ./enterprise:/mnt/enterprise/
+      # - path/to/third-party/modules:/mnt/third-party
+      - odoo-web-data:/var/lib/odoo
+    networks:
+      - odoo-dev-backend
+
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - odoo-dev-backend
+
+networks:
+  odoo-dev-backend:
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:

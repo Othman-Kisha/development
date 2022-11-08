@@ -1,8 +1,9 @@
-version: "2"
+version: "3.7"
 
 services:
   web:
-    image: odoo:15
+    build: .
+    platform: arm64v8
     restart: unless-stopped
     command: --dev=all
     depends_on:
@@ -13,12 +14,13 @@ services:
       - HOST=db
       - USER=odoo
       - PASSWORD=odoo
+    tty: true
+    stdin_open: true
     volumes:
-      - path/to/modules/for/dev:/mnt/custom
-      - path/to/enterprise:/mnt/enterprise
-      - path/to/third-party/modules:/mnt/third-party
-      - path/to/config:/etc/odoo
-      - path/to/logs:/var/log/odoo/
+      - ./logs:/var/log/odoo/
+      # - path/to/modules/for/dev:/mnt/custom
+      - ./enterprise:/mnt/enterprise/
+      # - path/to/third-party/modules:/mnt/third-party
       - odoo-web-data:/var/lib/odoo
     networks:
       - odoo-dev-backend
